@@ -4,16 +4,12 @@ import java.time.LocalDateTime;
 
 public class RueckgabeDTO {
 
+    String fahrtId;
     String scooterId;
+    String userId;
     LocalDateTime rueckgabe;
 
     public RueckgabeDTO() {
-        rueckgabe = LocalDateTime.now();
-    }
-
-    public RueckgabeDTO(String scooterId){
-        this();
-        this.scooterId = scooterId;
     }
 
     public String getScooterId() {
@@ -30,5 +26,21 @@ public class RueckgabeDTO {
 
     public void setRueckgabe(LocalDateTime rueckgabe) {
         this.rueckgabe = rueckgabe;
+    }
+
+    public String getFahrtId() {
+        return fahrtId;
+    }
+
+    public void setFahrtId(String fahrtId) {
+        this.fahrtId = fahrtId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -21,22 +21,13 @@ public class RueckgabeListener {
     ObjectMapper om;
 
     @Autowired
-    UserIdClient userIdClient;
-
-    @Autowired
     BonusService bonusService;
 
     @KafkaListener(topics = "scooter.rueckgabe")
     public void rueckgabeListener(String rueckgabe) throws JsonProcessingException {
         RueckgabeDTO rueckgabeDTO = om.readValue(rueckgabe, RueckgabeDTO.class);
-
         log.info("Scooter " + rueckgabeDTO.getScooterId() + " wurde zurückgegeben.");
 
-//        ResponseEntity<String> forEntity = restTemplate.getForEntity("http://localhost:8083/scooter/" + rueckgabeDTO.getScooterId() + "/fahrt", String.class);
-        ResponseEntity<String> userForScooter = userIdClient.getUserForScooter(rueckgabeDTO.getScooterId());
-
-        log.info("UserID from fahrten service: " + userForScooter.getBody());
-
-        bonusService.addBonusForUser(userForScooter.getBody());
+        bonusService.addBonusForUser(rueckgabeDTO.getUserId());
     }
 }
